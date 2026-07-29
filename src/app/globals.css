@@ -1,0 +1,297 @@
+@import "tailwindcss";
+
+/* ----------------------------------------------------------------------------
+   CoreBench design tokens — light only.
+   Near-white canvas, white surfaces, near-black type, one restrained blue accent.
+---------------------------------------------------------------------------- */
+:root {
+  /* Canvas & surfaces */
+  --background: #f7f8fa;
+  --surface: #ffffff;
+  --surface-2: #fbfcfd;
+  --sidebar: #fbfbfc;
+  --elevated: #ffffff;
+
+  /* Type */
+  --foreground: #15171c;
+  --muted-foreground: #5b6470;
+  --subtle-foreground: #98a1ad;
+  --on-accent: #ffffff;
+
+  /* Lines */
+  --border: #ecedf1;
+  --border-strong: #e1e3e9;
+  --ring: #3b6ef6;
+  --dot-color: rgba(20, 27, 45, 0.09);
+
+  /* Accent (the single restrained blue) */
+  --accent-50: #eef3ff;
+  --accent-100: #dde8ff;
+  --accent-200: #c2d6ff;
+  --accent-300: #97b6ff;
+  --accent-400: #6690fb;
+  --accent-500: #3b6ef6;
+  --accent-600: #2a57e0;
+  --accent-700: #2546bd;
+  --accent: #2a57e0;
+  --accent-soft: #eef3ff;
+
+  /* Status — desaturated, never loud */
+  --success: #11935a;
+  --success-soft: #e8f6ef;
+  --warning: #b06e00;
+  --warning-soft: #fbf1df;
+  --danger: #cf3b30;
+  --danger-soft: #fcecea;
+  --info: #2a57e0;
+  --info-soft: #eef3ff;
+  --neutral: #6b7480;
+  --neutral-soft: #f0f1f4;
+
+  /* Elevation */
+  --shadow-xs: 0 1px 2px rgba(16, 24, 40, 0.05);
+  --shadow-sm: 0 1px 3px rgba(16, 24, 40, 0.06), 0 1px 2px rgba(16, 24, 40, 0.04);
+  --shadow-md: 0 6px 20px -4px rgba(16, 24, 40, 0.1), 0 2px 6px -2px rgba(16, 24, 40, 0.05);
+  --shadow-lg: 0 20px 48px -12px rgba(16, 24, 40, 0.16), 0 4px 12px -4px rgba(16, 24, 40, 0.06);
+  --shadow-pop: 0 12px 40px -8px rgba(16, 24, 40, 0.18);
+
+  /* Radius scale */
+  --radius: 0.875rem;
+}
+
+/* Map tokens to Tailwind utilities (bg-*, text-*, border-*, ring-*, etc.) */
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-sidebar: var(--sidebar);
+  --color-elevated: var(--elevated);
+
+  --color-foreground: var(--foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-subtle-foreground: var(--subtle-foreground);
+  --color-on-accent: var(--on-accent);
+
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-ring: var(--ring);
+
+  --color-accent-50: var(--accent-50);
+  --color-accent-100: var(--accent-100);
+  --color-accent-200: var(--accent-200);
+  --color-accent-300: var(--accent-300);
+  --color-accent-400: var(--accent-400);
+  --color-accent-500: var(--accent-500);
+  --color-accent-600: var(--accent-600);
+  --color-accent-700: var(--accent-700);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
+  --color-neutral: var(--neutral);
+  --color-neutral-soft: var(--neutral-soft);
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", monospace;
+
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 0.375rem);
+  --radius-2xl: calc(var(--radius) + 0.75rem);
+
+  --shadow-xs: var(--shadow-xs);
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-pop: var(--shadow-pop);
+
+  --default-transition-duration: 180ms;
+  --default-transition-timing-function: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "cv11", "ss01";
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+}
+
+/* Refined, unobtrusive scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--muted-foreground) 30%, transparent) transparent;
+}
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--muted-foreground) 28%, transparent);
+  border-radius: 999px;
+  border: 3px solid transparent;
+  background-clip: padding-box;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--muted-foreground) 45%, transparent);
+  background-clip: padding-box;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Numeric/tabular alignment for metrics tables */
+.tabular {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* Subtle dot-grid canvas (digital-board style); dots show in the negative
+   space behind cards. Theme-aware via --dot-color. */
+.bg-grid {
+  background-image: radial-gradient(var(--dot-color) 0.5px, transparent 0.5px);
+  background-size: 18px 18px;
+  background-position: -0.5px -0.5px;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--muted-foreground) 12%, transparent);
+}
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--surface) 60%, transparent),
+    transparent
+  );
+  animation: shimmer 1.6s infinite;
+}
+
+/* ----------------------------------------------------------------------------
+   Radix surface animations (tooltips, dropdowns, popovers, dialogs).
+   Applied via `.cb-pop` / `.cb-overlay`; Radix toggles [data-state] on the node.
+---------------------------------------------------------------------------- */
+@keyframes cb-pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(3px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes cb-pop-out {
+  to {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+}
+@keyframes cb-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes cb-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes cb-dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+}
+@keyframes cb-sheet-in {
+  from {
+    transform: translateX(100%);
+  }
+}
+@keyframes cb-sheet-left-in {
+  from {
+    transform: translateX(-100%);
+  }
+}
+
+.cb-pop[data-state="open"],
+.cb-pop[data-state="delayed-open"] {
+  animation: cb-pop-in 150ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+.cb-pop[data-state="closed"] {
+  animation: cb-pop-out 110ms ease-in forwards;
+}
+.cb-overlay[data-state="open"] {
+  animation: cb-fade-in 180ms ease-out;
+}
+.cb-overlay[data-state="closed"] {
+  animation: cb-fade-out 140ms ease-in forwards;
+}
+.cb-dialog[data-state="open"] {
+  animation: cb-dialog-in 200ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+.cb-sheet[data-state="open"] {
+  animation: cb-sheet-in 260ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+.cb-sheet-left[data-state="open"] {
+  animation: cb-sheet-left-in 260ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
